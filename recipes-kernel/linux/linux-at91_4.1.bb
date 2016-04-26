@@ -19,7 +19,7 @@ SRCREV = "${AUTOREV}"
 KBRANCH = "linux-4.1-at91"
 SRC_URI = "git://github.com/linux4sam/linux-at91.git;protocol=git;branch=${KBRANCH}"
 SRC_URI += "file://defconfig \
-            file://0001-Add-4-SPI1-devices-to-Linux-Device-Tree-File.patch;patch=1"
+            file://0001-Activate-GPIO-Bitbanged-SPI.patch;patch=1"
 
 python __anonymous () {
 	if d.getVar('UBOOT_FIT_IMAGE', True) == 'xyes':

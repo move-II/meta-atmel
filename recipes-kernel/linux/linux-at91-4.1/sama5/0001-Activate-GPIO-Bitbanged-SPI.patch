@@ -1,0 +1,72 @@
+From 822a899c8fe4e353c0c9364eb17c5af01138b70a Mon Sep 17 00:00:00 2001
+From: Jonas Sticha <jonas.sticha@tum.de>
+Date: Tue, 26 Apr 2016 11:32:12 +0200
+Subject: [PATCH] Activate GPIO-Bitbanged SPI
+
+---
+ .../arm/boot/dts/at91-sama5d2_xplained_common.dtsi | 49 ++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+
+diff --git a/arch/arm/boot/dts/at91-sama5d2_xplained_common.dtsi b/arch/arm/boot/dts/at91-sama5d2_xplained_common.dtsi
+index 3dd0349..7205b1e 100644
+--- a/arch/arm/boot/dts/at91-sama5d2_xplained_common.dtsi
++++ b/arch/arm/boot/dts/at91-sama5d2_xplained_common.dtsi
+@@ -186,6 +186,55 @@
+ 				};
+ 			};
+ 
++			spig: spi {
++				compatible = "spi-gpio";
++				#address-cells = <0x1>;
++				ranges;
++				status = "okay";
++
++				gpio-sck = <&pioA 65 0>;
++				gpio-mosi = <&pioA 66 0>;
++				gpio-miso = <&pioA 67 0>;
++				cs-gpios = <&pioA 68 0>, <&pioA 69 0>, <&pioA 70 0>, <&pioA 71 0>, <&pioA 56 0>, <&pioA 57 0>;
++				num-chipselects = <6>;
++
++				device@0 {
++					compatible = "spidev";
++					reg = <0>;
++					spi-max-frequency = <10000000>;
++				};
++
++				device@1 {
++					compatible = "spidev";
++					reg = <1>;
++					spi-max-frequency = <10000000>;
++				};
++
++				device@2 {
++					compatible = "spidev";
++					reg = <2>;
++					spi-max-frequency = <10000000>;
++				};
++
++				device@3 {
++					compatible = "spidev";
++					reg = <3>;
++					spi-max-frequency = <10000000>;
++				};
++
++				device@4 {
++					compatible = "spidev";
++					reg = <4>;
++					spi-max-frequency = <10000000>;
++				};
++
++				device@5 {
++					compatible = "spidev";
++					reg = <5>;
++					spi-max-frequency = <10000000>;
++				};
++			};
++
+ 			macb0: ethernet@f8008000 {
+ 				pinctrl-names = "default";
+ 				pinctrl-0 = <&pinctrl_macb0_rmii &pinctrl_macb0_phy_irq>;
+-- 
+2.5.0
+
